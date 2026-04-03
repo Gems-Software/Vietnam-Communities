@@ -12,5 +12,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Community({ params }: Props) {
   const { community } = await params;
 
-  return <div>{community}</div>;
+  return (
+    <>
+      {community}
+    </>
+  )
 }
