@@ -1,16 +1,14 @@
-import Image from "next/image";
+import { WebLayout } from "@/components/base/layout/web-layout"
+import { Metadata } from "next"
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Community",
+}
+
+export default function Page() {
   return (
-    <>
-      <Image
-        className="dark:invert"
-        src="/next.svg"
-        alt="Next.js logo"
-        width={100}
-        height={20}
-        priority
-      />
-    </>
-  );
+    <WebLayout>
+      <div>body</div>
+    </WebLayout>
+  )
 }
