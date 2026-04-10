@@ -1,6 +1,6 @@
 "use client"
 
-import { Computer, Moon, Sun } from "lucide-react"
+import { Laptop, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { ComponentPropsWithoutRef, useEffect, useState } from "react"
 
@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [open, setOpen] = useState(null)
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -25,7 +26,7 @@ export function ThemeToggle() {
   const iconClass = "h-4 w-4"
   const iconSun = <Sun className={iconClass} />
   const iconMoon = <Moon className={iconClass} />
-  const iconSystem = <Computer className={iconClass} />
+  const iconSystem = <Laptop className={iconClass} />
 
   const currentTheme = !mounted ? null : theme === "dark" ? (
     <>{iconMoon} Dark</>
@@ -35,8 +36,15 @@ export function ThemeToggle() {
     <>{iconSystem} System</>
   )
 
+  const handleSelect = (themeValue: string) => {
+    setTheme(themeValue)
+    requestAnimationFrame(() => {
+      setOpen(null)
+    })
+  }
+
   return (
-    <NavigationMenu>
+    <NavigationMenu value={open} onValueChange={setOpen}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="gap-2">
@@ -44,13 +52,13 @@ export function ThemeToggle() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="flex flex-col p-1">
-              <ListItem title="Light" onClick={() => setTheme("light")}>
+              <ListItem title="Light" onClick={() => handleSelect("light")}>
                 {iconSun}
               </ListItem>
-              <ListItem title="Dark" onClick={() => setTheme("dark")}>
+              <ListItem title="Dark" onClick={() => handleSelect("dark")}>
                 {iconMoon}
               </ListItem>
-              <ListItem title="System" onClick={() => setTheme("system")}>
+              <ListItem title="System" onClick={() => handleSelect("system")}>
                 {iconSystem}
               </ListItem>
             </ul>

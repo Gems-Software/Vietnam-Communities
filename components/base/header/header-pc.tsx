@@ -20,8 +20,9 @@ export function HeaderPc() {
             className="dark:invert"
             src="/next.svg"
             alt=""
-            width={30}
-            height={30}
+            width={25}
+            height={25}
+            priority
           />
         </Link>
 
